@@ -1,5 +1,8 @@
+import asset.Images;
+import asset.Soundtrack;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
+import state.ExampleState;
 
 import java.awt.*;
 
@@ -68,6 +71,16 @@ public class Main extends StateBasedGame {
         container.setTargetFrameRate(FPS);
         container.setShowFPS(DEBUG_MODE);
         container.setVSync(V_SYNC);
+
+        // Load assets
+        Images.load();
+        Soundtrack.load();
+
+        // Init states
+        addState(new ExampleState());
+
+        // Enter first state
+        enterState(ExampleState.ID);
     }
 
     public static Main getInstance() {
