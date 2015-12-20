@@ -5,20 +5,19 @@
 package asset;
 
 
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 public class Images {
 
     // Pre-loaded images:
-    public static Image example;
+    public static SpriteSheet exampleSpriteSheet;
 
     private static boolean loaded = false;
 
     public static void load() throws SlickException {
         if (!loaded) {
-            // Define images here:
-//            example = new Image("");
+            exampleSpriteSheet = new SpriteSheet("emptySpritesheet.png", 64, 64);
             loaded = true;
         }
     }

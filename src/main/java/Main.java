@@ -15,8 +15,8 @@ public class Main extends StateBasedGame {
     private static final int FPS = 60;
     private static final int LOGIC_UPDATE_INTERVAL = FPS;
     private static final boolean V_SYNC = true;
-    private static final int WIDTH = 1366;
-    private static final int HEIGHT = 768;
+    private static final int WIDTH = 1920;
+    private static final int HEIGHT = 1080;
 
     private static Main _instance = null;
 
@@ -46,10 +46,21 @@ public class Main extends StateBasedGame {
 
         // Set full screen mode
         if (windowed) {
-            app.setDisplayMode(WIDTH, HEIGHT, false);
+            float fill = 0.9f; // Percentage of screen to fill with window
+            float scale = Math.min((float)displayWidth/WIDTH, (float)displayHeight/HEIGHT) * fill;
+            app.setDisplayMode((int)(WIDTH*scale), (int)(HEIGHT*scale), false);
         } else {
             app.setDisplayMode(displayWidth, displayHeight, true);
         }
+
+        // Frame rate settings
+        app.setMaximumLogicUpdateInterval(LOGIC_UPDATE_INTERVAL);
+        app.setAlwaysRender(true);
+        app.setTargetFrameRate(FPS);
+        app.setVSync(V_SYNC);
+
+        // Misc settings
+        app.setShowFPS(debug);
 
         // Start game
         app.start();
@@ -66,11 +77,6 @@ public class Main extends StateBasedGame {
 
     @Override
     public void initStatesList(GameContainer container) throws SlickException {
-        container.setMaximumLogicUpdateInterval(LOGIC_UPDATE_INTERVAL);
-        container.setAlwaysRender(true);
-        container.setTargetFrameRate(FPS);
-        container.setShowFPS(DEBUG_MODE);
-        container.setVSync(V_SYNC);
 
         // Load assets
         Images.load();
